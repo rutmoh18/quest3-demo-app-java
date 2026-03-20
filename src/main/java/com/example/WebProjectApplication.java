@@ -3,8 +3,6 @@ package com.example;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -17,34 +15,61 @@ public class WebProjectApplication {
 
     @GetMapping("/")
     public String home() {
-        // Return HTML content with branding and a form
         return "<html>" +
                 "<head>" +
-                "    <title>CloudFolks HUB</title>" +
+                "    <title>CloudFolks HUB CI/CD Demo</title>" +
                 "</head>" +
-                "<body style='text-align:center; background-color:#f0f8ff;'>" +
-                "    <h1 style='color: #4CAF50;'>Welcome to <span style='color: #00008B;'>CloudFolks HUB</span>!</h1>" +
-                "    <p style='font-size:20px; color: #555;'>Empowering Your DevOps Journey</p>" +
-                "    <form id='form' method='post' action='/submit' style='margin-top:20px;'>" +
-                "        <label for='name'>Name:</label><br>" +
-                "        <input type='text' id='name' name='name' required><br><br>" +
-                "        <label for='email'>Email:</label><br>" +
-                "        <input type='email' id='email' name='email' required><br><br>" +
-                "        <!-- Make the button non-functional using JavaScript -->" +
-                "        <button type='submit' onclick='return false;'>Submit</button>" +
-                "    </form>" +
-                "</body>" +
-                "</html>";
-    }
 
-    @PostMapping("/submit")
-    public String submit(@RequestParam String name, @RequestParam String email) {
-        // This part will never be executed because the form submission is blocked
-        return "<html>" +
-                "<head><title>Form Submitted</title></head>" +
-                "<body style='text-align:center; background-color:#f0f8ff;'>" +
-                "    <h1 style='color: #4CAF50;'>Thank You, " + name + "!</h1>" +
-                "    <p style='font-size:20px; color: #555;'>Your email (" + email + ") has been submitted successfully.</p>" +
+                "<body style='font-family:Arial; text-align:center; background:linear-gradient(to right, #e3f2fd, #ffffff);'>" +
+
+                "    <h1 style='color:#0d47a1;'>🚀 CloudFolks HUB</h1>" +
+                "    <h2 style='color:#1976d2;'>Quest 3 Demo Application</h2>" +
+                "    <p style='font-size:18px;'>AWS CI/CD Pipeline Demonstration</p>" +
+
+                "    <hr style='width:60%;'>" +
+
+                "    <h3 style='color:#2e7d32;'>🔧 CI/CD Tools Used</h3>" +
+
+                "    <div style='display:flex; justify-content:center; flex-wrap:wrap;'>" +
+
+                "        <div style='border:1px solid #ccc; padding:15px; margin:10px; width:200px; border-radius:10px; background:#ffffff;'>" +
+                "            <h4>CodeCommit</h4>" +
+                "            <p>Stores Source Code</p>" +
+                "        </div>" +
+
+                "        <div style='border:1px solid #ccc; padding:15px; margin:10px; width:200px; border-radius:10px; background:#ffffff;'>" +
+                "            <h4>CodeBuild</h4>" +
+                "            <p>Builds Java Application</p>" +
+                "        </div>" +
+
+                "        <div style='border:1px solid #ccc; padding:15px; margin:10px; width:200px; border-radius:10px; background:#ffffff;'>" +
+                "            <h4>Amazon ECR</h4>" +
+                "            <p>Stores Docker Image</p>" +
+                "        </div>" +
+
+                "        <div style='border:1px solid #ccc; padding:15px; margin:10px; width:200px; border-radius:10px; background:#ffffff;'>" +
+                "            <h4>Docker</h4>" +
+                "            <p>Containerizes Application</p>" +
+                "        </div>" +
+
+                "        <div style='border:1px solid #ccc; padding:15px; margin:10px; width:200px; border-radius:10px; background:#ffffff;'>" +
+                "            <h4>Amazon EC2</h4>" +
+                "            <p>Runs Application Container</p>" +
+                "        </div>" +
+
+                "    </div>" +
+
+                "    <hr style='width:60%;'>" +
+
+                "    <h3 style='color:#0d47a1;'>⚙️ CI/CD Flow</h3>" +
+                "    <p style='font-size:18px;'>" +
+                "        Code → Build → Docker Image → ECR → Deploy to EC2" +
+                "    </p>" +
+
+                "    <hr style='width:60%;'>" +
+
+                "    <p style='font-size:16px; color:#555;'>✨ Powered by CloudFolks HUB</p>" +
+
                 "</body>" +
                 "</html>";
     }
