@@ -1,0 +1,146 @@
+🚀 Deploy Server (CD Machine Setup)
+(Deployer David Machine – Ritik Hub)
+________________________________________
+🎯 Purpose of the Deploy Server
+On the Build Server, we already:
+•	Built the application 
+•	Created the Docker image 
+•	Pushed the image to ECR 
+👉 Now, the Deploy Server is responsible for:
+•	Pulling the Docker image from ECR 
+•	Running the container 
+•	Making the application accessible to users 
+________________________________________
+❓ Why Do We Need ECR Here?
+🔴 Problem:
+•	The Docker image exists only on the Build Server 
+•	The Deploy Server cannot access it directly 
+________________________________________
+✅ Solution: Amazon ECR
+Amazon ECR acts as a central storage (registry) for Docker images.
+________________________________________
+🎯 Why ECR is Needed:
+•	📦 Centralized image storage 
+•	🔁 Easy sharing between servers 
+•	🔐 Secure access via AWS IAM 
+•	🚀 Enables scalable deployments 
+________________________________________
+🧠 Deployment Flow
+ECR
+⬇
+Deploy Server
+⬇
+Pull Image
+⬇
+Run Container
+⬇
+Application Live
+________________________________________
+🏗️ Step 1: Create EC2 Instance (Deploy Server)
+________________________________________
+👉 Go to AWS Console:
+•	EC2 → Launch Instance 
+________________________________________
+Fill Details:
+•	Name: Deployment-Server 
+•	AMI: Amazon Linux 2023 
+•	Instance Type: t2.micro / t3.micro 
+•	Key Pair: Create or use existing 
+________________________________________
+🌐 Network Settings:
+Click Edit → Add rule:
+•	Type: Custom TCP 
+•	Port: 8080 
+•	Source: 0.0.0.0/0 
+👉 Also ensure:
+•	SSH (22) is allowed 
+________________________________________
+▶️ Launch Instance
+________________________________________
+🔐 Step 2: Connect to Deploy Server
+ssh -i build-key.pem ec2-user@<PUBLIC-IP>
+________________________________________
+🔧 Step 3: Install & Configure Docker
+________________________________________
+Install Docker
+sudo yum update -y
+sudo yum install docker -y
+________________________________________
+Start Docker
+sudo systemctl start docker
+sudo systemctl enable docker
+________________________________________
+Give Permission to ec2-user
+sudo usermod -aG docker ec2-user
+________________________________________
+⚠️ Important Note:
+After running the above command:
+exit
+ssh -i build-key.pem ec2-user@<PUBLIC-IP>
+👉 You must reconnect for Docker permissions to apply
+________________________________________
+🔐 Step 4: Configure AWS & Login to ECR
+________________________________________
+Configure AWS (if not already done)
+aws configure
+Enter:
+•	Access Key 
+•	Secret Key 
+•	Region (must match ECR, e.g., ap-south-1 or us-east-1) 
+________________________________________
+Login to ECR (Correct Command)
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 637423650512.dkr.ecr.us-east-1.amazonaws.com
+________________________________________
+✅ Expected Output:
+Login Succeeded
+________________________________________
+📥 Step 5: Pull Docker Image from ECR
+________________________________________
+Command:
+docker pull <ECR-URI>:latest
+________________________________________
+Example:
+docker pull 637423650512.dkr.ecr.us-east-1.amazonaws.com/quest3-demo-app:latest
+________________________________________
+🎯 Output:
+•	Docker image downloaded to the Deploy Server 
+________________________________________
+🔍 Step 6: Verify Image
+docker images
+________________________________________
+You should see:
+•	Repository: quest3-demo-app 
+•	Tag: latest 
+________________________________________
+▶️ Step 7: Run Container
+docker run -d -p 8080:8080 <ECR-URI>:latest
+________________________________________
+Example:
+docker run -d -p 8080:8080 637423650512.dkr.ecr.us-east-1.amazonaws.com/quest3-demo-app:latest
+________________________________________
+🌐 Step 8: Access Application
+________________________________________
+Open in browser:
+http://<EC2-PUBLIC-IP>:8080
+________________________________________
+🎯 Final Result
+•	Docker image pulled from ECR 
+•	Container running successfully 
+•	Application accessible via browser 
+________________________________________
+🧠 Final Understanding
+Component	Role
+Build Server	Build & push Docker image
+ECR	Store Docker image centrally
+Deploy Server	Pull & run the application
+________________________________________
+🚀 Final Outcome
+✅ End-to-end deployment completed
+✅ Application running on cloud
+✅ Ready for CI/CD automation
+________________________________________
+👨‍💻 Author
+Ritik Mohadikar
+
+
+
