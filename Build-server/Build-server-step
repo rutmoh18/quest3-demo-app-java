@@ -83,13 +83,13 @@ ls target/
 👉 Must show:
 WebProject-1.0-SNAPSHOT.jar
 ________________________________________
-▶️ Step 8: Run Application (Important Fix)
+▶️ Step 8: Run Application
 java -jar target/WebProject-1.0-SNAPSHOT.jar --server.port=8080
 ________________________________________
 🌐 Access:
 http://<PUBLIC-IP>:8080
 ________________________________________
-🐳 Step 9: Create Dockerfile (Correct Version)
+🐳 Step 9: Create Dockerfile
 nano Dockerfile
 Paste this:
 FROM eclipse-temurin:17-jdk
@@ -106,10 +106,7 @@ ________________________________________
 🔍 Verify Image
 docker images
 ________________________________________
-▶️ Step 11: Run Container (FIXED)
-❌ Old (Wrong):
--p 8080:80
-✅ Correct:
+▶️ Step 11: Run Container
 docker run -d -p 8080:8080 webproject-demo
 ________________________________________
 🌐 Step 12: Access Application
