@@ -1,0 +1,124 @@
+🛠️ Build Server Setup – Clean Steps
+________________________________________
+☁️ Step 1: Create EC2 Instance
+👉 Go to AWS Console:
+•	EC2 → Launch Instance 
+Fill Details:
+•	Name: Build-Server 
+•	AMI: Amazon Linux 2023 
+•	Instance Type: t2.micro / t3.micro 
+•	Key Pair: Create new or use existing 
+________________________________________
+🌐 Network Settings:
+Click Edit → Add rule:
+•	Type: Custom TCP 
+•	Port: 8080 
+•	Source: 0.0.0.0/0 
+👉 Also ensure:
+•	SSH (22) open 
+________________________________________
+▶️ Launch Instance
+________________________________________
+🔐 Step 2: Connect to Server
+ssh -I key.pem ec2-user@<PUBLIC-IP>
+________________________________________
+🔧 Step 3: Install Required Tools
+________________________________________
+1️⃣ Update System
+sudo yum update -y
+________________________________________
+2️⃣ Install Git
+sudo yum install git -y
+git --version
+________________________________________
+3️⃣ Install Java 17 (Corrected)
+sudo yum install java-17-amazon-corretto -y
+java -version
+________________________________________
+4️⃣ Install Maven
+sudo yum install maven -y
+mvn -version
+________________________________________
+5️⃣ Install Docker
+sudo yum install docker -y
+________________________________________
+▶️ Start Docker
+sudo systemctl start docker
+sudo systemctl enable docker
+________________________________________
+👤 Give Docker Permission
+sudo usermod -aG docker ec2-user
+⚠️ IMPORTANT:
+exit
+Reconnect:
+ssh -i key.pem ec2-user@<PUBLIC-IP>
+________________________________________
+⚙️ Step 4: Configure Git (Fixed mistakes)
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+git config --list
+________________________________________
+📥 Step 5: Clone Repository
+git clone https://github.com/USERNAME/ Manual-devops-setup.git
+cd Manual-devops-setup
+________________________________________
+📂 Verify Files
+ls
+👉 Expected:
+•	pom.xml 
+•	src 
+________________________________________
+⚙️ Step 6: Build Application
+mvn clean package
+________________________________________
+💡 What it does:
+•	clean → removes old build 
+•	package → compiles + creates JAR 
+________________________________________
+✅ Expected Output:
+BUILD SUCCESS
+________________________________________
+📦 Step 7: Verify JAR File
+ls target/
+👉 Must show:
+WebProject-1.0-SNAPSHOT.jar
+________________________________________
+▶️ Step 8: Run Application (Important Fix)
+java -jar target/WebProject-1.0-SNAPSHOT.jar --server.port=8080
+________________________________________
+🌐 Access:
+http://<PUBLIC-IP>:8080
+________________________________________
+🐳 Step 9: Create Dockerfile (Correct Version)
+nano Dockerfile
+Paste this:
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY target/WebProject-1.0-SNAPSHOT.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.jar","--server.port=8080"]
+Save:
+CTRL + X → Y → Enter
+________________________________________
+🏗️ Step 10: Build Docker Image
+docker build -t webproject-demo .
+________________________________________
+🔍 Verify Image
+docker images
+________________________________________
+▶️ Step 11: Run Container (FIXED)
+❌ Old (Wrong):
+-p 8080:80
+✅ Correct:
+docker run -d -p 8080:8080 webproject-demo
+________________________________________
+🌐 Step 12: Access Application
+http://<PUBLIC-IP>:8080
+________________________________________
+
+🎯 Final Output
+Application successfully built
+JAR file created
+Docker image created
+Container running
+App accessible on browser
