@@ -17,12 +17,12 @@ public class WebProjectApplication {
     public String home() {
         return "<html>" +
                 "<head>" +
-                "    <title>CloudFolks HUB CI/CD Demo</title>" +
+                "    <title>Ritik HUB CI/CD Demo</title>" +
                 "</head>" +
 
                 "<body style='font-family:Arial; text-align:center; background:linear-gradient(to right, #e3f2fd, #ffffff);'>" +
 
-                "    <h1 style='color:#0d47a1;'>🚀 CloudFolks HUB</h1>" +
+                "    <h1 style='color:#0d47a1;'>🚀 Ritik HUB</h1>" +
                 "    <h2 style='color:#1976d2;'>Quest 3 Demo Application</h2>" +
                 "    <p style='font-size:18px;'>AWS CI/CD Pipeline Demonstration</p>" +
 
@@ -68,7 +68,7 @@ public class WebProjectApplication {
 
                 "    <hr style='width:60%;'>" +
 
-                "    <p style='font-size:16px; color:#555;'>✨ Powered by CloudFolks HUB</p>" +
+                "    <p style='font-size:16px; color:#555;'>✨ Powered by Ritik HUB</p>" +
 
                 "</body>" +
                 "</html>";
