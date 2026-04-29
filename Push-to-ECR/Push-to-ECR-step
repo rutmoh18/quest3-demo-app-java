@@ -1,0 +1,139 @@
+📦 Moving from Build to Deployment (Using Amazon ECR)
+________________________________________
+🎯 Introduction
+After successfully:
+•	Building the application (JAR) 
+•	Creating the Docker image 
+•	Testing it on the Build Server 
+👉 The next challenge is:
+How do we transfer this Docker image to the Deploy Server?
+________________________________________
+❓ Why Do We Need ECR?
+🔴 Problem:
+•	The Docker image exists only on the Build Server 
+•	The Deploy Server cannot access it directly 
+________________________________________
+✅ Solution: Amazon ECR (Elastic Container Registry)
+Amazon ECR is a managed Docker registry service provided by AWS.
+________________________________________
+🎯 Why We Use ECR:
+•	📦 Store Docker images centrally 
+•	🔁 Share images across multiple servers 
+•	🔐 Secure access using AWS IAM 
+•	🚀 Enable smooth and scalable deployments 
+________________________________________
+🧠 Workflow Overview
+Build Server
+⬇
+Push Docker Image → ECR
+⬇
+Deploy Server
+⬇
+Pull Image → Run Container
+________________________________________
+🏗️ Step 1: Create ECR Repository
+________________________________________
+👉 Go to AWS Console:
+•	Open ECR (Elastic Container Registry) 
+________________________________________
+➕ Create Repository:
+•	Click Create Repository 
+•	Repository Name: quest3-demo-app
+•	Keep default settings 
+•	Click Create 
+________________________________________
+🎯 Output:
+You will get a repository URI like:
+637423650512.dkr.ecr.us-east-1.amazonaws.com/quest3-demo-app
+________________________________________
+🔐 Step 2: Login to ECR (Build Server)
+________________________________________
+✅ Command:
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin <ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com
+________________________________________
+🔐 AWS Configure + ECR Login 
+________________________________________
+🎯 Purpose
+Before pushing Docker images to ECR, the Build Server must:
+•	Authenticate with AWS 
+•	Get permission to access ECR 
+•	Login Docker to ECR 
+________________________________________
+❌ Error You Got
+Unable to locate credentials
+Cannot perform an interactive login from a non TTY device
+👉 Meaning:
+•	AWS CLI was not configured 
+•	No credentials available 
+________________________________________
+✅ Step 1: Configure AWS CLI
+Run:
+aws configure
+________________________________________
+Enter Details:
+AWS Access Key ID: <YOUR_ACCESS_KEY>
+AWS Secret Access Key: <YOUR_SECRET_KEY>
+Default region name: us-east-1
+Default output format: json
+________________________________________
+🎯 Output:
+•	AWS CLI configured successfully 
+•	Credentials stored in the system
+
+________________________________________
+🏷️ Step 3: Tag Docker Image (IMPORTANT)
+________________________________________
+❗ Why Tagging is Required:
+Docker needs to know which repository to push the image to.
+________________________________________
+✅ Command:
+docker tag webproject-demo:latest <ECR-URI>:latest
+________________________________________
+🎯 Example:
+docker tag quest3-demo-app:latest 637423650512.dkr.ecr.us-east-1.amazonaws.com/quest3-demo-app:latest
+________________________________________
+🎯 Output:
+•	Image is now linked to your ECR repository 
+________________________________________
+📤 Step 4: Push Image to ECR
+________________________________________
+✅ Command:
+docker push <ECR-URI>:latest
+________________________________________
+🎯 Example:
+docker push 637423650512.dkr.ecr.us-east-1.amazonaws.com/quest3-demo-app:latest
+________________________________________
+🎯 Output:
+•	Image is uploaded to ECR successfully 
+________________________________________
+🔍 Step 5: Verify in AWS
+________________________________________
+👉 Go to:
+•	AWS Console → ECR → Your Repository 
+You should see:
+•	Image tag: latest 
+•	Image size 
+•	Push timestamp
+________________________________________
+🎯 Final Result
+•	Docker image successfully stored in ECR 
+•	Image is available for deployment 
+•	Deploy Server can now pull and run the application 
+________________________________________
+🚀 What Happens Next?
+On the Deploy Server:
+•	Pull the image from ECR 
+•	Run the container 
+•	Application becomes live 
+________________________________________
+🧠 Final Understanding
+Without ECR:
+❌ Image cannot be shared easily between servers
+With ECR:
+✅ Centralized storage
+✅ Easy deployment
+✅ Scalable architecture
+________________________________________
+👨‍💻 Author
+Ritik Mohadikar
+
