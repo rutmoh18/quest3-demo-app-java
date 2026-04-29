@@ -20,7 +20,7 @@ ________________________________________
 ▶️ Launch Instance
 ________________________________________
 🔐 Step 2: Connect to Server
-ssh -I key.pem ec2-user@<PUBLIC-IP>
+ssh -i key.pem ec2-user@<PUBLIC-IP>
 ________________________________________
 🔧 Step 3: Install Required Tools
 ________________________________________
@@ -53,7 +53,7 @@ exit
 Reconnect:
 ssh -i key.pem ec2-user@<PUBLIC-IP>
 ________________________________________
-⚙️ Step 4: Configure Git (Fixed mistakes)
+⚙️ Step 4: Configure Git 
 git config --global user.name "Your Name"
 git config --global user.email "your@email.com"
 git config --list
