@@ -1,0 +1,137 @@
+🚀 Manual Setup Application
+(Code → Build → Deploy)
+By Ritik 
+________________________________________
+🎯 Purpose of the Project
+The purpose of this project is to understand how an application is built and deployed manually, step by step.
+In this project, we learn:
+•	How code is written and managed 
+•	How code is converted into an executable format (JAR) 
+•	How an application is containerized using Docker 
+•	How it is deployed on a server 
+👉 This understanding is essential because modern DevOps automation (CI/CD) is built on top of this manual process.
+________________________________________
+❓ Why This Project is Important
+In real-world environments:
+•	Applications are not deployed manually 
+•	Automation pipelines are used 
+But to understand automation properly:
+👉 You must first understand the manual workflow
+This project helps you:
+•	Understand real-world deployment flow 
+•	Debug issues when systems fail 
+•	Build a strong foundation for DevOps and Cloud 
+________________________________________
+🏗️ What We Are Building
+We are taking a simple Java web application and:
+1.	Building it 
+2.	Packaging it into a JAR file 
+3.	Converting it into a Docker image 
+4.	Deploying it on a cloud server 
+________________________________________
+🔄 Overall Workflow
+Developer → Code
+⬇
+Build Server → Build Application
+⬇
+Docker → Create Image
+⬇
+ECR → Store Image
+⬇
+Deploy Server → Run Application
+⬇
+User → Access via Browser
+________________________________________
+🧑‍💻 Step 1: Development Phase
+✔️ What are we doing?
+The developer writes and manages the application code.
+✔️ Why are we doing this?
+To create the base application logic.
+✔️ How does it work?
+•	Code is written locally 
+•	Stored and managed using version control 
+🎯 Output:
+•	Source code is ready 
+________________________________________
+🛠️ Step 2: Build Phase
+✔️ What are we doing?
+We convert the source code into an executable format.
+✔️ Why are we doing this?
+Raw code cannot run directly
+👉 It must be compiled into a runnable format (JAR)
+✔️ How does it work?
+•	Code is compiled 
+•	Dependencies are added 
+🎯 Output:
+•	JAR file is generated (ready to run) 
+________________________________________
+▶️ Step 3: Application Testing
+✔️ What are we doing?
+We run the application locally to test it.
+✔️ Why are we doing this?
+To ensure the application works correctly before deployment
+✔️ How does it work?
+•	Application is started 
+•	Tested through a browser 
+🎯 Output:
+•	Application runs successfully 
+________________________________________
+🐳 Step 4: Containerization (Docker)
+✔️ What are we doing?
+We package the application into a Docker container.
+✔️ Why are we doing this?
+•	To make the application portable 
+•	To ensure it runs the same in all environments 
+✔️ How does it work?
+•	A Docker image is created 
+•	A container is started from the image 
+🎯 Output:
+•	Application runs inside a container 
+________________________________________
+📦 Step 5: Image Storage (ECR)
+✔️ What are we doing?
+We store the Docker image in a cloud registry.
+✔️ Why are we doing this?
+•	To share the image with other servers 
+•	To maintain centralized storage 
+✔️ How does it work?
+•	The image is pushed to a registry 
+🎯 Output:
+•	Image is available in the cloud 
+________________________________________
+🚀 Step 6: Deployment Phase
+✔️ What are we doing?
+We deploy the application on a server.
+✔️ Why are we doing this?
+To make the application accessible to users
+✔️ How does it work?
+•	Server pulls the image 
+•	Runs the container 
+🎯 Output:
+•	Application is live and accessible 
+________________________________________
+🌐 Final Output
+Users can access the application through a browser using the server’s public IP.
+________________________________________
+⚠️ Key Concepts Learned
+•	Difference between build and run 
+•	Importance of JAR files 
+•	Role of Docker containers 
+•	Concept of port mapping 
+•	End-to-end cloud deployment flow 
+________________________________________
+💡 Final Understanding
+After completing this project, you will clearly understand:
+•	The journey from code to production 
+•	Each manual step involved in deployment 
+•	The foundation of DevOps pipelines 
+________________________________________
+🚀 Next Step
+You are now ready to:
+•	Learn CI/CD pipelines 
+•	Use automation tools like Jenkins or GitHub Actions 
+•	Work on real production deployments 
+________________________________________
+👨‍💻 Author
+Ritik Mohadikar
+
